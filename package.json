@@ -1,0 +1,33 @@
+{
+	"name": "com.slax.uitoolkit",
+	"version": "0.0.1",
+	"displayName": "Slax's UI Toolkit",
+	"description": "A UI Toolkit library of elements",
+	"unity": "2021.1",
+	"keywords": [
+        "UI Toolkit",
+		"Slax"
+	],
+	"author": {
+		"url": "https://github.com/FelixBole",
+		"name": "Felix Bole",
+		"email": "felix.slax@gmail.com"
+	},
+	"files": [
+		"Documentation/**",
+		"Documentation.meta",
+		"Editor/**",
+		"Editor.meta",
+		"Runtime/**",
+		"Runtime.meta",
+		"Samples/**",
+		"Samples.meta",
+		"CHANGELOG.md",
+		"CHANGELOG.md.meta",
+		"LICENSE.md",
+		"LICENSE.md.meta",
+		"README.md",
+		"README.md.meta",
+		"package.json.meta"
+	]
+}

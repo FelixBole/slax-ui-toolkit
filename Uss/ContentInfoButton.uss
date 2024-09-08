@@ -1,0 +1,9 @@
+.contentInfoButton-btn {
+    transition-duration: 0.2s;
+    transition-property: background-color;
+    background-color: rgba(31, 31, 31, 0.97);
+}
+
+.contentInfoButton-btn:hover {
+    background-color: rgba(54, 55, 55, 0.79);
+}
