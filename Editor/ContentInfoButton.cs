@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Slax.UIToolkit.Editor
@@ -73,8 +70,8 @@ namespace Slax.UIToolkit.Editor
 
         public ContentInfoButton()
         {
+            RemoveFromClassList(ussClassName);
             VisualTreeAsset uxml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UXML_ASSET_PATH);
-            AddToClassList(ussClassName);
             uxml.CloneTree(this);
         }
 

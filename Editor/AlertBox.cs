@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace Slax.UIToolkit.Editor
@@ -59,14 +60,30 @@ namespace Slax.UIToolkit.Editor
         public AlertBox()
         {
             AddToClassList(ussClassName);
+            var icon = new VisualElement() { name = "img" };
+            icon.style.width = 24;
+            icon.style.height = 24;
+            var bgSize = new BackgroundSize(BackgroundSizeType.Contain);
+            var styleBackgroundSize = new StyleBackgroundSize(bgSize);
+            icon.style.backgroundSize = styleBackgroundSize;
+            Add(icon);
             _label.text = labelText;
             Add(_label);
             ApplyAlertStyles(); // Apply initial styles based on default alert type
         }
 
+        public AlertBox RemoveIcon()
+        {
+            var icon = this.Q<VisualElement>("img");
+            icon.style.display = DisplayStyle.None;
+            return this;
+        }
+
         public static AlertBox Warning(string message)
         {
             AlertBox alertBox = new AlertBox();
+            var icon = alertBox.Q<VisualElement>("img");
+            icon.style.backgroundImage = AssetDatabase.LoadAssetAtPath<Texture2D>(Variables.WARNING_ICON_PATH);
             alertBox.alertType = AlertType.Warning;
             alertBox.labelText = message;
             return alertBox;
@@ -75,6 +92,8 @@ namespace Slax.UIToolkit.Editor
         public static AlertBox Info(string message)
         {
             AlertBox alertBox = new AlertBox();
+            var icon = alertBox.Q<VisualElement>("img");
+            icon.style.backgroundImage = AssetDatabase.LoadAssetAtPath<Texture2D>(Variables.INFO_ICON_PATH);
             alertBox.alertType = AlertType.Info;
             alertBox.labelText = message;
             return alertBox;
@@ -83,6 +102,8 @@ namespace Slax.UIToolkit.Editor
         public static AlertBox Danger(string message)
         {
             AlertBox alertBox = new AlertBox();
+            var icon = alertBox.Q<VisualElement>("img");
+            icon.style.backgroundImage = AssetDatabase.LoadAssetAtPath<Texture2D>(Variables.DANGER_ICON_PATH);
             alertBox.alertType = AlertType.Danger;
             alertBox.labelText = message;
             return alertBox;
@@ -91,6 +112,8 @@ namespace Slax.UIToolkit.Editor
         public static AlertBox Success(string message)
         {
             AlertBox alertBox = new AlertBox();
+            var icon = alertBox.Q<VisualElement>("img");
+            icon.style.backgroundImage = AssetDatabase.LoadAssetAtPath<Texture2D>(Variables.SUCCESS_ICON_PATH);
             alertBox.alertType = AlertType.Success;
             alertBox.labelText = message;
             return alertBox;
@@ -100,25 +123,23 @@ namespace Slax.UIToolkit.Editor
         {
             ResetStyles();
 
-            float a = 0.8f;
-
             switch (_alertType)
             {
                 case AlertType.Info:
-                    SetStyles(new Color(0.9f, 0.9f, 1.0f, a), new Color(0.4f, 0.6f, 1.0f, a));
+                    SetStyles(Variables.INFO_COLOR_BACKGROUND, Variables.INFO_COLOR_BORDER);
                     AddToClassList(ussInfoClassName);
                     break;
                 case AlertType.Danger:
                     AddToClassList(ussDangerClassName);
-                    SetStyles(new Color(1.0f, 0.8f, 0.8f, a), new Color(1.0f, 0.4f, 0.4f, a));
+                    SetStyles(Variables.DANGER_COLOR_BACKGROUND, Variables.DANGER_COLOR_BORDER);
                     break;
                 case AlertType.Success:
                     AddToClassList(ussSuccessClassName);
-                    SetStyles(new Color(0.8f, 1.0f, 0.8f, a), new Color(0.4f, 1.0f, 0.4f, a));
+                    SetStyles(Variables.SUCCESS_COLOR_BACKGROUND, Variables.SUCCESS_COLOR_BORDER);
                     break;
                 case AlertType.Warning:
                     AddToClassList(ussWarningClassName);
-                    SetStyles(new Color(1.0f, 0.9f, 0.6f, a), new Color(1.0f, 0.6f, 0.0f, a));
+                    SetStyles(Variables.WARNING_COLOR_BACKGROUND, Variables.WARNING_COLOR_BORDER);
                     break;
             }
         }

@@ -1,9 +1,7 @@
 {
-    "name": "Slax.UIToolkit.Editor",
-    "rootNamespace": "Slax.UIToolkit.Editor",
-    "references": [
-        "GUID:bd22d485099ccdb44b0835933ac423c5"
-    ],
+    "name": "Slax.UIToolkit",
+    "rootNamespace": "Slax.UIToolkit",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
