@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace Slax.UIToolkit
@@ -7,6 +8,15 @@ namespace Slax.UIToolkit
     /// </summary>
     public static class Variables
     {
+        public enum AlertType
+        {
+            Info,
+            Danger,
+            Success,
+            Warning,
+            None,
+        }
+
         public static readonly string EDIT_ICON_PATH = "Packages/com.slax.uitoolkit/Sprites/Icons/icon-edit-48.png";
         public static readonly string DELETE_ICON_PATH = "Packages/com.slax.uitoolkit/Sprites/Icons/icon-delete-48.png";
         public static readonly string SAVE_ICON_PATH = "Packages/com.slax.uitoolkit/Sprites/Icons/icon-save-48.png";
@@ -18,6 +28,23 @@ namespace Slax.UIToolkit
         public static readonly string DANGER_ICON_PATH = "Packages/com.slax.uitoolkit/Sprites/Icons/icon-cross-48.png";
         public static readonly string SUCCESS_ICON_PATH = "Packages/com.slax.uitoolkit/Sprites/Icons/icon-success-48.png";
         public static readonly string WARNING_ICON_PATH = "Packages/com.slax.uitoolkit/Sprites/Icons/icon-warning-48.png";
+
+        public static Texture2D GetIconForType(AlertType type)
+        {
+            switch (type)
+            {
+                case AlertType.Info:
+                    return AssetDatabase.LoadAssetAtPath<Texture2D>(INFO_ICON_PATH);
+                case AlertType.Danger:
+                    return AssetDatabase.LoadAssetAtPath<Texture2D>(DANGER_ICON_PATH);
+                case AlertType.Success:
+                    return AssetDatabase.LoadAssetAtPath<Texture2D>(SUCCESS_ICON_PATH);
+                case AlertType.Warning:
+                    return AssetDatabase.LoadAssetAtPath<Texture2D>(WARNING_ICON_PATH);
+                default:
+                    return null;
+            }
+        }
 
         public static readonly float ACTION_BUTTON_SIZE = 20;
         public static readonly float BASE_PADDING = 4;

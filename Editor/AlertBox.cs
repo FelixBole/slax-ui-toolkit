@@ -1,19 +1,12 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using static Slax.UIToolkit.Variables;
 
 namespace Slax.UIToolkit.Editor
 {
     public class AlertBox : VisualElement
     {
-        public enum AlertType
-        {
-            Info,
-            Danger,
-            Success,
-            Warning
-        }
-
         public new class UxmlFactory : UxmlFactory<AlertBox, UxmlTraits> { }
 
         public new class UxmlTraits : VisualElement.UxmlTraits

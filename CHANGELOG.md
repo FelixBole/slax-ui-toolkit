@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2024-09-11
+### Feat
+- Add tooltips on demo elements to show how to generate them
+- Add alert typed Pills
+- Add optional icons to alert typed Pills
+- Add Tab menu component
+
+### Refactor
+- Moved AlertType to variables for reusability in other components
+
 ## [0.2.0] - 2024-09-10
 ### Feat
 - Add Variables class for shareable config values such as base styles for success / warning / info as well as icon paths

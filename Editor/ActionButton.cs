@@ -35,6 +35,9 @@ namespace Slax.UIToolkit.Editor
 
         public ActionButton SetIcon(Texture2D icon)
         {
+            style.justifyContent = Justify.Center;
+            style.alignItems = Align.Center;
+
             VisualElement ve = new VisualElement();
             ve.name = "icon";
             ve.style.alignSelf = Align.Center;

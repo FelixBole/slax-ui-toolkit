@@ -13,6 +13,5 @@ Slax > UI Toolkit Demo
 - [x] Quick access action buttons
 - [x] Typography elements
 - [x] Pills / Chips
-- [ ] Sections / containers
-- [ ] Tab selection conditionned container render
-- [ ] ...
+- [x] Tab Menu with integrated tab switching
+- [ ] ... IDK yet

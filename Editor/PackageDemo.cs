@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -24,22 +25,20 @@ namespace Slax.UIToolkit.Editor
             var scrollView = new ScrollView() { viewDataKey = "slax-uitoolkit-demo-scrollview" };
 
             root.Add(Typography.H1("Slax UI Toolkit Demo").Center());
+            root.Add(Typography.H6("Some elements have tooltips with code snippets").Center());
 
             root.Add(scrollView);
 
             scrollView.Add(DemoActionButtons());
             scrollView.Add(DemoAlertBoxes());
-            scrollView.Add(DemoContentInfoButtons());
             scrollView.Add(DemoPills());
+            scrollView.Add(DemoContentInfoButtons());
+            scrollView.Add(DemoTabMenu());
         }
 
         public VisualElement DemoActionButtons()
         {
-            var actionBtnsContainer = new VisualElement();
-            actionBtnsContainer.style.paddingBottom = 10;
-            actionBtnsContainer.style.paddingTop = 10;
-            actionBtnsContainer.style.paddingLeft = 10;
-            actionBtnsContainer.style.paddingRight = 10;
+            var actionBtnsContainer = new GroupBox();
             var label = Typography.H3("Action Buttons");
             label.style.unityFontStyleAndWeight = FontStyle.Bold;
             actionBtnsContainer.Add(label);
@@ -48,26 +47,42 @@ namespace Slax.UIToolkit.Editor
             actionBtnsContainer.Add(Typography.Small("new ActionButton() or ActionButton.PlusButton() etc."));
             actionBtnsContainer.Add(row);
 
-            row.Add(ActionButton.PlusButton());
-            row.Add(ActionButton.MinusButton());
-            row.Add(ActionButton.SearchButton());
-            row.Add(ActionButton.InfoButton());
-            row.Add(ActionButton.EditButton());
-            row.Add(ActionButton.DeleteButton());
-            row.Add(ActionButton.CloseButton());
-            row.Add(ActionButton.SaveButton());
+            Dictionary<ActionButton, string> actionButtons = new Dictionary<ActionButton, string>() {
+                { ActionButton.PlusButton(), "ActionButton.PlusButton()" },
+                { ActionButton.MinusButton(), "ActionButton.MinusButton()" },
+                { ActionButton.SearchButton(), "ActionButton.SearchButton()" },
+                { ActionButton.InfoButton(), "ActionButton.InfoButton()" },
+                { ActionButton.EditButton(), "ActionButton.EditButton()" },
+                { ActionButton.DeleteButton(), "ActionButton.DeleteButton()" },
+                { ActionButton.CloseButton(), "ActionButton.CloseButton()" },
+                { ActionButton.SaveButton(), "ActionButton.SaveButton()" }
+            };
+
+            foreach (var button in actionButtons)
+            {
+                button.Key.tooltip = button.Value;
+                row.Add(button.Key);
+            }
 
             var roundedRow = new Row();
             roundedRow.style.flexDirection = FlexDirection.Row;
 
-            roundedRow.Add(ActionButton.PlusButton().Rounded());
-            roundedRow.Add(ActionButton.MinusButton().Rounded());
-            roundedRow.Add(ActionButton.SearchButton().Rounded());
-            roundedRow.Add(ActionButton.InfoButton().Rounded());
-            roundedRow.Add(ActionButton.EditButton().Rounded());
-            roundedRow.Add(ActionButton.DeleteButton().Rounded());
-            roundedRow.Add(ActionButton.CloseButton().Rounded());
-            roundedRow.Add(ActionButton.SaveButton().Rounded());
+            Dictionary<ActionButton, string> roundedButtons = new Dictionary<ActionButton, string>() {
+                { ActionButton.PlusButton().Rounded(), "ActionButton.PlusButton().Rounded()" },
+                { ActionButton.MinusButton().Rounded(), "ActionButton.MinusButton().Rounded()" },
+                { ActionButton.SearchButton().Rounded(), "ActionButton.SearchButton().Rounded()" },
+                { ActionButton.InfoButton().Rounded(), "ActionButton.InfoButton().Rounded()" },
+                { ActionButton.EditButton().Rounded(), "ActionButton.EditButton().Rounded()" },
+                { ActionButton.DeleteButton().Rounded(), "ActionButton.DeleteButton().Rounded()" },
+                { ActionButton.CloseButton().Rounded(), "ActionButton.CloseButton().Rounded()" },
+                { ActionButton.SaveButton().Rounded(), "ActionButton.SaveButton().Rounded()" }
+            };
+
+            foreach (var button in roundedButtons)
+            {
+                button.Key.tooltip = button.Value;
+                roundedRow.Add(button.Key);
+            }
 
             actionBtnsContainer.Add(roundedRow);
 
@@ -85,21 +100,26 @@ namespace Slax.UIToolkit.Editor
             alertBoxesContainer.Add(label);
             alertBoxesContainer.Add(Typography.Small("new AlertBox() or AlertBox.Info() / AlertBox.Warning() etc."));
 
-            alertBoxesContainer.Add(AlertBox.Info("This is an information message"));
-            alertBoxesContainer.Add(AlertBox.Warning("This is a warning message"));
-            alertBoxesContainer.Add(AlertBox.Danger("This is a danger message"));
-            alertBoxesContainer.Add(AlertBox.Success("This is a success message"));
-            alertBoxesContainer.Add(AlertBox.Info("This is an information message with no icon").RemoveIcon());
+            Dictionary<AlertBox, string> alertBoxes = new Dictionary<AlertBox, string>() {
+                { AlertBox.Info("This is an information message"), "AlertBox.Info()" },
+                { AlertBox.Warning("This is a warning message"), "AlertBox.Warning()" },
+                { AlertBox.Danger("This is a danger message"), "AlertBox.Danger()" },
+                { AlertBox.Success("This is a success message"), "AlertBox.Success()" },
+                { AlertBox.Info("This is an information message with no icon").RemoveIcon(), "AlertBox.Info().RemoveIcon()" }
+            };
+
+            foreach (var alertBox in alertBoxes)
+            {
+                alertBox.Key.tooltip = alertBox.Value;
+                alertBoxesContainer.Add(alertBox.Key);
+            }
+
             return alertBoxesContainer;
         }
 
         public VisualElement DemoContentInfoButtons()
         {
-            var contentInfoBtnsContainer = new VisualElement();
-            contentInfoBtnsContainer.style.paddingBottom = 10;
-            contentInfoBtnsContainer.style.paddingTop = 10;
-            contentInfoBtnsContainer.style.paddingLeft = 10;
-            contentInfoBtnsContainer.style.paddingRight = 10;
+            var contentInfoBtnsContainer = new GroupBox();
             var heading = Typography.H3("Content Info Buttons");
             contentInfoBtnsContainer.Add(heading);
             contentInfoBtnsContainer.Add(Typography.Small("new ContentInfoButton()"));
@@ -121,11 +141,7 @@ namespace Slax.UIToolkit.Editor
 
         public VisualElement DemoPills()
         {
-            var pillsContainer = new VisualElement();
-            pillsContainer.style.paddingBottom = 10;
-            pillsContainer.style.paddingTop = 10;
-            pillsContainer.style.paddingLeft = 10;
-            pillsContainer.style.paddingRight = 10;
+            var pillsContainer = new GroupBox();
             var heading = Typography.H3("Pills");
             pillsContainer.Add(heading);
             pillsContainer.Add(Typography.Small("new Pill()"));
@@ -134,14 +150,68 @@ namespace Slax.UIToolkit.Editor
 
             pillsContainer.Add(row);
 
-            for (int i = 1; i <= 16; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 Pill pill = new Pill();
                 pill.labelText = "Pill " + i;
                 row.Add(pill);
             }
 
+            var row2 = new Row();
+
+            pillsContainer.Add(row2);
+
+            List<Pill> pills = new List<Pill>() {
+                new Pill().SetText("Info").ToInfo(),
+                new Pill().SetText("Warning").ToWarning(),
+                new Pill().SetText("Danger").ToDanger(),
+                new Pill().SetText("Success").ToSuccess()
+            };
+
+            foreach (var pill in pills)
+            {
+                pill.tooltip = $"new Pill().SetText(\"{pill.labelText}\").To{pill.labelText}()";
+                row2.Add(pill);
+            }
+
+            var row3 = new Row();
+            pillsContainer.Add(row3);
+
+            List<Pill> iconPills = new List<Pill>() {
+                new Pill().SetText("Info").ToInfo().WithAlertIcon(),
+                new Pill().SetText("Warning").ToWarning().WithAlertIcon(),
+                new Pill().SetText("Danger").ToDanger().WithAlertIcon(),
+                new Pill().SetText("Success").ToSuccess().WithAlertIcon()
+            };
+
+            foreach (var pill in iconPills)
+            {
+                pill.tooltip = $"new Pill().SetText(\"{pill.labelText}\").To{pill.labelText}().WithAlertIcon()";
+                row3.Add(pill);
+            }
+
             return pillsContainer;
+        }
+
+        public VisualElement DemoTabMenu()
+        {
+            var tabMenuContainer = new GroupBox();
+            tabMenuContainer.Add(Typography.H3("Tab Menu"));
+            tabMenuContainer.Add(Typography.Small("new TabMenu().SetTabs()"));
+
+            List<TabMenu.TabAndContainer> tabs = new List<TabMenu.TabAndContainer>() {
+                new TabMenu.TabAndContainer("Info", AlertBox.Info("Content 1")),
+                new TabMenu.TabAndContainer("Warning", AlertBox.Warning("Content 2")),
+                new TabMenu.TabAndContainer("Danger", AlertBox.Danger("Content 3")),
+                new TabMenu.TabAndContainer("Success", AlertBox.Success("Content 4"))
+            };
+
+            var tabMenu = new TabMenu()
+                .SetTabs(tabs);
+
+            tabMenuContainer.Add(tabMenu);
+
+            return tabMenuContainer;
         }
     }
 }
