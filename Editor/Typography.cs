@@ -30,6 +30,12 @@ namespace Slax.UIToolkit.Editor
             return this;
         }
 
+        public Typography Grow()
+        {
+            style.flexGrow = 1;
+            return this;
+        }
+
         public static Typography H1(string text)
         {
             var h1 = new Typography();

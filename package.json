@@ -1,6 +1,6 @@
 {
   "name": "com.slax.uitoolkit",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "displayName": "Slax's UI Toolkit",
   "description": "A UI Toolkit library of elements",
   "unity": "2021.1",
